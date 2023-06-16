@@ -25,7 +25,10 @@ class Staff(commands.Cog):
         embed.add_field(name="Username:", value=username.mention)
         embed.add_field(name="Result:", value=result)
         embed.add_field(name="Reason", value=reason)
-        embed.set_thumbnail(url="https://media.discordapp.net/attachments/1115898779552456744/1118962504958222498/Google_Forms_logo_2014-2020.svg.png")
+        if result == "Accepted":
+            embed.set_thumbnail(url="https://discord.com/assets/212e30e47232be03033a87dc58edaa95.svg")
+        else:
+            embed.set_thumbnail(url="https://discord.com/assets/8becd37ab9d13cdfe37c08c496a9def3.svg")
         await inter.response.send_message(embed=embed)
 
 def setup(client):
