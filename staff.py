@@ -43,6 +43,7 @@ class Staff(commands.Cog):
         embed.add_field(name="Notes", value=notes, inline=False)
         
         await channel.send(embed=embed)
+        await inter.response.send_message(":white_check_mark: **Sent it to <#1115706650100244580>.**")
 
 def setup(client):
     client.add_cog(Staff(client))
