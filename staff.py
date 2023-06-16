@@ -26,7 +26,7 @@ class Staff(commands.Cog):
         embed.add_field(name="Result:", value=result)
         embed.add_field(name="Reason", value=reason)
         if result == "Accepted":
-            embed.set_image(url="https://www.emoji.co.uk/files/twitter-emojis/symbols-twitter/11160-white-heavy-check-mark.png", width="50px", height="50px")
+            embed.set_image(url="https://cdn.discordapp.com/attachments/1115611333006733504/1119232568131321876/rsz_11160-white-heavy-check-mark.png")
         else:
             embed.set_thumbnail(url="https://www.emoji.co.uk/files/twitter-emojis/symbols-twitter/11130-cross-mark.png")
         await inter.response.send_message(embed=embed)
