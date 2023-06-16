@@ -26,9 +26,9 @@ class Staff(commands.Cog):
         embed.add_field(name="Result:", value=result)
         embed.add_field(name="Reason", value=reason)
         if result == "Accepted":
-            embed.set_thumbnail(url="https://www.emoji.co.uk/files/twitter-emojis/symbols-twitter/11160-white-heavy-check-mark.png")
+            embed.set_thumbnail(url="https://www.emoji.co.uk/files/twitter-emojis/symbols-twitter/11160-white-heavy-check-mark.png", width="50px", height="50px")
         else:
-            embed.set_thumbnail(url="https://www.emoji.co.uk/files/twitter-emojis/symbols-twitter/11130-cross-mark.png")
+            embed.set_thumbnail(url="https://www.emoji.co.uk/files/twitter-emojis/symbols-twitter/11130-cross-mark.png", width="50px", height="50px")
         await inter.response.send_message(embed=embed)
 
 def setup(client):
