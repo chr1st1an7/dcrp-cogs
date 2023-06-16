@@ -24,3 +24,4 @@ class UserCmds(commands.Cog):
         latency = round(self.client.latency * 1000)
 
         await inter.response.send_message(f'Pong! Latency: {latency}ms')
+        
