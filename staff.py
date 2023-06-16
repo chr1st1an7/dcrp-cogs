@@ -42,7 +42,7 @@ class Staff(commands.Cog):
         embed.add_field(name="Username:", value=username.mention, inline=False)    
         embed.add_field(name="Notes", value=notes, inline=False)
         
-        await channel.send_message(embed=embed)
+        await channel.send(embed=embed)
 
 def setup(client):
     client.add_cog(Staff(client))
