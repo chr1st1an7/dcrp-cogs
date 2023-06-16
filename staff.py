@@ -20,6 +20,7 @@ class Staff(commands.Cog):
     # ------------------------ Commands
 
     @commands.slash_command()
+    @commands.has_role(1115707610247745677)
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
         channel = self.client.get_channel(1115706650100244580)
         embed = disnake.Embed(title = "Staff Application Result", color=0xe4d96f)
