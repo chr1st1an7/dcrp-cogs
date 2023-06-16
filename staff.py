@@ -28,11 +28,11 @@ class Staff(commands.Cog):
         icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
         if result == "Accepted":
             embed.color = disnake.Color.green()
-            result = disnake.Role(1119234205738602537)
+            result = 1119234205738602537
         
         else:
             embed.color = disnake.Color.red()
-            result = disnake.Role(1119234212243984424)
+            result = 1119234212243984424
 
         embed.add_field(name="Username:", value=username.mention, inline=False)    
         embed.add_field(name="Notes", value=notes, inline=False)
