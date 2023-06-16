@@ -25,5 +25,5 @@ class User(commands.Cog):
 
         await inter.response.send_message(f'Pong! Latency: {latency}ms')
 
-    def setup(client):
-        client.add_cog(User(client))
+def setup(client):
+    client.add_cog(User(client))
