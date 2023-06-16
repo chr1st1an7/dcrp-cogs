@@ -21,11 +21,7 @@ class Staff(commands.Cog):
 
     @commands.slash_command()
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
-        embed = disnake.Embed(title = "Staff Application Results", color=0xe4d96f)
-        
-        embed.set_author(
-        name=f"@{inter.author}",
-        icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
+        embed = disnake.Embed(title = "Staff Application Result", color=0xe4d96f)
         if result == "Accepted":
             embed.color = disnake.Color.green()
             result_role_id = 1119234205738602537
@@ -36,10 +32,15 @@ class Staff(commands.Cog):
 
         guild = inter.guild
         result_role = guild.get_role(result_role_id)
+        embed.add_field(name="", value=result_role.mention, inline=False)
+        embed.set_author(
+        name=f"@{inter.author}",
+        icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
+        
 
         embed.add_field(name="Username:", value=username.mention, inline=False)    
         embed.add_field(name="Notes", value=notes, inline=False)
-        embed.add_field(name="Result:", value=result_role.mention, inline=False)
+        
         await inter.response.send_message(embed=embed)
 
 def setup(client):
