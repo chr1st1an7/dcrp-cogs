@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from disnake.ui import SelectMenu, SelectOption
+from disnake_selectmenu import SelectMenu, SelectOption
 
 class Staff(commands.Cog):
     def __init__(self, client):
@@ -19,11 +19,11 @@ class Staff(commands.Cog):
         select_menu = SelectMenu(custom_id='result_dropdown', placeholder='Select result', options=options)
         message = await inter.response.send_message(
             'Select the result:',
-            view=disnake.ui.View(select_menu)
+            components=[select_menu]
         )
 
         def check(interaction: disnake.Interaction):
-            return interaction.message == message and interaction.user == inter.author
+            return interaction.message.id == message.id and interaction.user.id == inter.author.id
 
         try:
             interaction = await self.client.wait_for('select_option', check=check, timeout=60.0)
