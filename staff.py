@@ -26,7 +26,7 @@ class Staff(commands.Cog):
         embed.add_field(name="Result:", value=result)
         embed.add_field(name="Reason", value=reason)
         embed.set_author(
-        name=inter.author,
+        name=inter.author.mention,
         icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
         await inter.response.send_message(embed=embed)
 
