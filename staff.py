@@ -21,6 +21,7 @@ class Staff(commands.Cog):
 
     @commands.slash_command()
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
+        channel = self.client.get_channel(1115706650100244580)
         embed = disnake.Embed(title = "Staff Application Result", color=0xe4d96f)
         if result == "Accepted":
             embed.color = disnake.Color.green()
@@ -41,7 +42,7 @@ class Staff(commands.Cog):
         embed.add_field(name="Username:", value=username.mention, inline=False)    
         embed.add_field(name="Notes", value=notes, inline=False)
         
-        await inter.response.send_message(embed=embed)
+        await channel.send_message(embed=embed)
 
 def setup(client):
     client.add_cog(Staff(client))
