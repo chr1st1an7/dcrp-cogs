@@ -45,7 +45,7 @@ class Staff(commands.Cog):
         await channel.send(f"{username.mention}")
         await channel.send(embed=embed)
         
-        await inter.response.send_message(":white_check_mark: **Sent it to <#1115706650100244580>.**")
+        await inter.response.send_message(":white_check_mark: **Sent it to <#1115706650100244580>.**", ephemeral=True)
 
 def setup(client):
     client.add_cog(Staff(client))
