@@ -16,7 +16,7 @@ class ResultModal(disnake.ui.View):
             self.result = interaction.data['values'][0]
     
     @disnake.ui.button(label='Submit', style=disnake.ButtonStyle.primary)
-    async def submit_button(self, button: disnake.ui.Button, interaction: disnake.ui.component.ButtonInteraction):
+    async def submit_button(self, button: disnake.ui.Button, interaction: disnake.Interaction):
         if self.result is None:
             await interaction.response.send_message('Please select a result.', ephemeral=True)
             return
