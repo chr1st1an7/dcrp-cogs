@@ -1,14 +1,56 @@
 import disnake
-from disnake import message
 from disnake.ext import commands
-from disnake.ext.commands import command, has_permissions, bot_has_permissions
-from disnake.ui import View, Button, button
-from disnake import ButtonStyle, Interaction
-from disnake.ext import tasks
-import random
+from disnake.ui import View, Button, Select, SelectOption
+
+class ResultModal(disnake.ui.View):
+    def __init__(self, inter, username, notes):
+        super().__init__()
+        self.inter = inter
+        self.username = username
+        self.notes = notes
+        
+        self.result = None  # Variable to store the selected result
+    
+    @disnake.ui.select(placeholder='Select result', options=[
+        SelectOption(label='Accepted', value='Accepted'),
+        SelectOption(label='Denied', value='Denied')
+    ])
+    async def select_result(self, select: disnake.ui.Select, interaction: disnake.MessageInteraction):
+        self.result = select.values[0]
+    
+    @disnake.ui.button(label='Submit', style=disnake.ButtonStyle.primary)
+    async def submit_button(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
+        if self.result is None:
+            await interaction.response.send_message('Please select a result.', ephemeral=True)
+            return
+        
+        channel = self.inter.channel
+        embed = disnake.Embed(title='Staff Application Result', color=0xe4d96f)
+        
+        if self.result == 'Accepted':
+            embed.color = disnake.Color.green()
+            result_role_id = 1119234205738602537
+        else:
+            embed.color = disnake.Color.red()
+            result_role_id = 1119234212243984424
+        
+        guild = self.inter.guild
+        result_role = guild.get_role(result_role_id)
+        
+        embed.set_author(
+            name=f"@{self.inter.author}",
+            icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png"
+        )
+        
+        embed.add_field(name="Username:", value=self.username.mention, inline=False)
+        embed.add_field(name="Notes", value=self.notes, inline=False)
+        embed.add_field(name="Result:", value=result_role.mention, inline=False)
+        
+        await channel.send(embed=embed)
+        await interaction.response.send_message(":white_check_mark: **Sent it to the channel.**", ephemeral=True)
+
 
 class Staff(commands.Cog):
-    client = commands
     def __init__(self, client):
         self.client = client
 
@@ -16,36 +58,11 @@ class Staff(commands.Cog):
     async def on_ready(self):
         print(f'Staff Cog is online.')
 
-    
-    # ------------------------ Commands
-
     @commands.slash_command()
-    async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
-        channel = self.client.get_channel(1115706650100244580)
-        embed = disnake.Embed(title = "Staff Application Result", color=0xe4d96f)
-        if result == "Accepted":
-            embed.color = disnake.Color.green()
-            result_role_id = 1119234205738602537
-        
-        else:
-            embed.color = disnake.Color.red()
-            result_role_id = 1119234212243984424
+    async def result(self, inter, username: disnake.Member, notes: str):
+        modal_view = ResultModal(inter, username, notes)
+        await inter.response.send_message('Select the result:', view=modal_view)
 
-        guild = inter.guild
-        result_role = guild.get_role(result_role_id)
-        embed.add_field(name="", value=result_role.mention, inline=False)
-        embed.set_author(
-        name=f"@{inter.author}",
-        icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
-        
-
-        embed.add_field(name="Username:", value=username.mention, inline=False)    
-        embed.add_field(name="Notes", value=notes, inline=False)
-        
-        await channel.send(f"{username.mention}")
-        await channel.send(embed=embed)
-        
-        await inter.response.send_message(":white_check_mark: **Sent it to <#1115706650100244580>.**", ephemeral=True)
 
 def setup(client):
     client.add_cog(Staff(client))
