@@ -7,7 +7,7 @@ from disnake import ButtonStyle, Interaction
 from disnake.ext import tasks
 import random
 
-class UserCmds(commands.Cog):
+class User(commands.Cog):
     client = commands
     def __init__(self, client):
         self.client = client
@@ -24,4 +24,6 @@ class UserCmds(commands.Cog):
         latency = round(self.client.latency * 1000)
 
         await inter.response.send_message(f'Pong! Latency: {latency}ms')
-        
+
+    def setup(client):
+        client.add_cog(User(client))
