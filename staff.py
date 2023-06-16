@@ -39,7 +39,7 @@ class Staff(commands.Cog):
 
         embed.add_field(name="Username:", value=username.mention, inline=False)    
         embed.add_field(name="Notes", value=notes, inline=False)
-        embed.add_field(name="Result:", value=result.mention, inline=False)
+        embed.add_field(name="Result:", value=result_role.mention, inline=False)
         await inter.response.send_message(embed=embed)
 
 def setup(client):
