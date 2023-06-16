@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from disnake.ui import View, Button, Select, SelectOption
+from disnake.ui import View, Button, Select
 
 class ResultModal(disnake.ui.View):
     def __init__(self, inter, username, notes):
@@ -11,15 +11,12 @@ class ResultModal(disnake.ui.View):
         
         self.result = None  # Variable to store the selected result
     
-    @disnake.ui.select(placeholder='Select result', options=[
-        SelectOption(label='Accepted', value='Accepted'),
-        SelectOption(label='Denied', value='Denied')
-    ])
-    async def select_result(self, select: disnake.ui.Select, interaction: disnake.MessageInteraction):
-        self.result = select.values[0]
+    async def callback(self, interaction: disnake.Interaction):
+        if interaction.component.id == 'result_dropdown':
+            self.result = interaction.data['values'][0]
     
     @disnake.ui.button(label='Submit', style=disnake.ButtonStyle.primary)
-    async def submit_button(self, button: disnake.ui.Button, interaction: disnake.MessageInteraction):
+    async def submit_button(self, button: disnake.ui.Button, interaction: disnake.ui.ButtonInteraction):
         if self.result is None:
             await interaction.response.send_message('Please select a result.', ephemeral=True)
             return
@@ -61,6 +58,17 @@ class Staff(commands.Cog):
     @commands.slash_command()
     async def result(self, inter, username: disnake.Member, notes: str):
         modal_view = ResultModal(inter, username, notes)
+        select = Select(
+            placeholder='Select result',
+            options=[
+                disnake.SelectOption(label='Accepted', value='Accepted'),
+                disnake.SelectOption(label='Denied', value='Denied')
+            ],
+            custom_id='result_dropdown',
+            max_values=1,
+            min_values=1
+        )
+        modal_view.add_item(select)
         await inter.response.send_message('Select the result:', view=modal_view)
 
 
