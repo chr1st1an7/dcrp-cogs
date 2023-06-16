@@ -29,10 +29,10 @@ class Staff(commands.Cog):
         name=f"@{inter.author}",
         icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
         if result == "Accepted":
-            embed.disnake.Color.green()
+            embed.color = disnake.Color.green()
         
         else:
-            embed.disnake.Color.red()
+            embed.color = disnake.Color.red()
         await inter.response.send_message(embed=embed)
 
 def setup(client):
