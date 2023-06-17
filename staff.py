@@ -52,57 +52,39 @@ class Staff(commands.Cog):
     @commands.slash_command()
     @commands.has_role(1115701058384179300)
     async def partnership(self, inter):
+        client = self.client
           # Acknowledge the command before executing
 
-    # Open a modal to get user input
-        modal = disnake.ui.View()
-        modal.input_values = {}  # Dictionary to store input values
+        # Open a modal to get user input
+            # Create a modal for text input
+        class InputModal(disnake.ui.View):
+            def __init__(self):
+                super().__init__()
+                self.input_value = None
 
-        modal = disnake.ui.View()
-        modal.input_values = {}  # Dictionary to store input values
+            @disnake.ui.button(label="Cancel", style=disnake.ButtonStyle.danger)
+            async def cancel(self, button: disnake.ui.Button, interaction: disnake.Interaction):
+                self.input_value = None
+                await interaction.message.edit(view=None)
 
-        async def callback(interaction):
-            for component in interaction.message.components:
-                if isinstance(component, disnake.ui.Select):
-                    modal.input_values[component.custom_id] = component.values[0]
+            @disnake.ui.button(label="Submit", style=disnake.ButtonStyle.primary)
+            async def submit(self, button: disnake.ui.Button, interaction: disnake.Interaction):
+                await interaction.message.edit(view=None)
 
-            #await interaction.response.defer()
+        modal = InputModal()
 
-        modal.add_item(
-            disnake.ui.Select(
-                custom_id="input1",
-                placeholder="Select an option",
-                options=[
-                    disnake.SelectOption(label="Option 1", value="option1"),
-                    disnake.SelectOption(label="Option 2", value="option2"),
-                ]
-            )
-        )
+        # Prompt the user for input
+        await inter.send("Please enter the information for the embed:")
 
-        modal.add_item(
-            disnake.ui.Select(
-                custom_id="input2",
-                placeholder="Select an option",
-                options=[
-                    disnake.SelectOption(label="Option A", value="optionA"),
-                    disnake.SelectOption(label="Option B", value="optionB"),
-                ]
-            )
-        )
+        # Wait for user input
+        response = await client.wait_for("message", check=lambda m: m.author.id == inter.user.id)
 
-        modal.add_item(disnake.ui.Button(style=disnake.ButtonStyle.primary, label="Submit", custom_id="submit"))
-        modal.callback = callback
-
-        await inter.send("Please select options for the embed:", view=modal)
-
-        while len(modal.input_values) < 2:
-            await disnake.utils.sleep_until(1)  # Wait for user input
+        # Store the input value
+        modal.input_value = response.content
 
         # Create and send the embed
-        embed = disnake.Embed(title="Ping Command", color=disnake.Color.blurple())
-        embed.add_field(name="Input 1", value=modal.input_values["input1"])
-        embed.add_field(name="Input 2", value=modal.input_values["input2"])
-        await inter.send(embed=embed)
+        embed = disnake.Embed(title="Ping Command", description=modal.input_value, color=disnake.Color.blurple())
+        await inter.send(embed=embed, view=modal)
 
 def setup(client):
     client.add_cog(Staff(client))
