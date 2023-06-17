@@ -70,8 +70,8 @@ class Staff(commands.Cog):
                 custom_id="input1",
                 placeholder="Select an option",
                 options=[
-                    disnake.ui.SelectOption(label="Option 1", value="option1"),
-                    disnake.ui.SelectOption(label="Option 2", value="option2"),
+                    disnake.SelectOption(label="Option 1", value="option1"),
+                    disnake.SelectOption(label="Option 2", value="option2"),
                 ]
             )
         )
@@ -81,8 +81,8 @@ class Staff(commands.Cog):
                 custom_id="input2",
                 placeholder="Select an option",
                 options=[
-                    disnake.ui.SelectOption(label="Option A", value="optionA"),
-                    disnake.ui.SelectOption(label="Option B", value="optionB"),
+                    disnake.SelectOption(label="Option A", value="optionA"),
+                    disnake.SelectOption(label="Option B", value="optionB"),
                 ]
             )
         )
