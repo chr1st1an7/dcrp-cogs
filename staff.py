@@ -99,9 +99,9 @@ class Staff(commands.Cog):
                     await disnake.AppCmdInter.send_message('@everyone')
 
                 if ping_value == 'here':
-                    await disnake.AppCmdInter.send_message('@here')
+                    await disnake.Interaction.send_message('@here')
 
-                await disnake.AppCmdInter.send_message(embed=embed)
+                await disnake.Interaction.send_message(embed=embed)
 
         await inter.response.send_modal(modal=MyModal())
 
