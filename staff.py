@@ -60,13 +60,13 @@ class Staff(commands.Cog):
 
         async def callback(interaction):
             for component in interaction.message.components:
-                if isinstance(component, disnake.ui.SelectMenu):
+                if isinstance(component, disnake.ui.Select):
                     modal.input_values[component.custom_id] = component.values[0]
 
             #await interaction.response.defer()
 
         modal.add_item(
-            disnake.ui.SelectMenu(
+            disnake.ui.Select(
                 custom_id="input1",
                 placeholder="Select an option",
                 options=[
@@ -77,7 +77,7 @@ class Staff(commands.Cog):
         )
 
         modal.add_item(
-            disnake.ui.SelectMenu(
+            disnake.ui.Select(
                 custom_id="input2",
                 placeholder="Select an option",
                 options=[
