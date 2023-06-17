@@ -51,7 +51,7 @@ class Staff(commands.Cog):
 
     @commands.slash_command()
     @commands.has_role(1115701058384179300)
-    async def partnership(self, inter):
+    async def partnership(self, inter, ping : str = commands.Param(choices=["No", "Here", "Everyone"])):
         client = self.client
           # Acknowledge the command before executing
 
@@ -74,7 +74,7 @@ class Staff(commands.Cog):
         modal = InputModal()
 
         # Prompt the user for input
-        await inter.send("Please enter the information for the embed:")
+        await inter.send("Please enter the advert:")
 
         # Wait for user input
         response = await client.wait_for("message", check=lambda m: m.author.id == inter.user.id)
@@ -83,7 +83,15 @@ class Staff(commands.Cog):
         modal.input_value = response.content
 
         # Create and send the embed
-        embed = disnake.Embed(title="Ping Command", description=modal.input_value, color=disnake.Color.blurple())
+        embed = disnake.Embed(title="Partnership Advert", description=modal.input_value, color=disnake.Color.blurple())
+        if ping.lower == "no":
+            pass
+        
+        elif ping.lower == "here":
+            await inter.send("@here")
+
+        else:
+            await inter.send("@everyone")
         await inter.send(embed=embed, view=modal)
 
 def setup(client):
