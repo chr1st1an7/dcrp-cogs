@@ -51,7 +51,7 @@ class Staff(commands.Cog):
 
     @commands.slash_command()
     @commands.has_role(1115701058384179300)
-    async def partnership(self, inter, ad, ping : str = commands.Param(choices=["no", "here", "everyone"])):
+    async def partnership(self, inter):
           # Acknowledge the command before executing
 
     # Open a modal to get user input
