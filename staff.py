@@ -95,9 +95,9 @@ class Staff(commands.Cog):
 
                 ping_value = inter.text_values.get('ping', '').lower()
                 if ping_value == 'everyone':
-                    await inter.edit_original_message(content="@everyone")
+                    await inter.send_message(content="@everyone")
                 elif ping_value == 'here':
-                    await inter.edit_original_message(content="@here")
+                    await inter.send_message(content="@here")
 
                 await inter.edit_original_message(embed=embed)
 
