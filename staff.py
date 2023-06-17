@@ -52,7 +52,7 @@ class Staff(commands.Cog):
     @commands.slash_command()
     @commands.has_role(1115701058384179300)
     async def partnership(self, inter, ad, ping : str = commands.Param(choices=["no", "here", "everyone"])):
-        await inter.defer()  # Acknowledge the command before executing
+          # Acknowledge the command before executing
 
     # Open a modal to get user input
         modal = disnake.ui.View()
