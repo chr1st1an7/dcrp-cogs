@@ -48,5 +48,58 @@ class Staff(commands.Cog):
         
         await inter.response.send_message(":white_check_mark: **Sent it to <#1115706650100244580>.**", ephemeral=True)
 
+
+    @commands.slash_command()
+    @commands.has_role(1115701058384179300)
+    async def partnership(self, inter, ad, ping : str = commands.Param(choices=["no", "here", "everyone"])):
+        await inter.defer()  # Acknowledge the command before executing
+
+    # Open a modal to get user input
+        modal = disnake.ui.View()
+        modal.input_values = {}  # Dictionary to store input values
+
+        async def callback(interaction):
+            for component in interaction.message.components:
+                if isinstance(component, disnake.ui.SelectMenu):
+                    modal.input_values[component.custom_id] = component.values[0]
+
+            await interaction.response.defer()
+
+        modal.add_item(
+            disnake.ui.SelectMenu(
+                custom_id="input1",
+                placeholder="Select an option",
+                options=[
+                    disnake.ui.SelectOption(label="Option 1", value="option1"),
+                    disnake.ui.SelectOption(label="Option 2", value="option2"),
+                ]
+            )
+        )
+
+        modal.add_item(
+            disnake.ui.SelectMenu(
+                custom_id="input2",
+                placeholder="Select an option",
+                options=[
+                    disnake.ui.SelectOption(label="Option A", value="optionA"),
+                    disnake.ui.SelectOption(label="Option B", value="optionB"),
+                ]
+            )
+        )
+
+        modal.add_item(disnake.ui.Button(style=disnake.ButtonStyle.primary, label="Submit", custom_id="submit", row=1))
+        modal.callback = callback
+
+        await inter.send("Please select options for the embed:", view=modal)
+
+        while len(modal.input_values) < 2:
+            await disnake.utils.sleep_until(1)  # Wait for user input
+
+        # Create and send the embed
+        embed = disnake.Embed(title="Ping Command", color=disnake.Color.blurple())
+        embed.add_field(name="Input 1", value=modal.input_values["input1"])
+        embed.add_field(name="Input 2", value=modal.input_values["input2"])
+        await inter.send(embed=embed)
+
 def setup(client):
     client.add_cog(Staff(client))
