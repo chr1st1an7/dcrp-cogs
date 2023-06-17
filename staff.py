@@ -6,6 +6,7 @@ from disnake.ui import View, Button, button
 from disnake import ButtonStyle, Interaction
 from disnake.ext import tasks
 import random
+from disnake import TextInputStyle
 
 class Staff(commands.Cog):
     client = commands
@@ -51,50 +52,43 @@ class Staff(commands.Cog):
 
     @commands.slash_command()
     @commands.has_any_role(1115701058384179300, 1115635235795775588)
-    async def partnership(self, inter, ping : str = commands.Param(choices=["No", "Here", "Everyone"])):
+    async def partnership(self, inter: disnake.AppCmdInter):
         client = self.client
           # Acknowledge the command before executing
 
         # Open a modal to get user input
             # Create a modal for text input
-        class InputModal(disnake.ui.View):
+        class MyModal(disnake.ui.Modal):
             def __init__(self):
-                super().__init__()
-                self.input_value = None
+                # The details of the modal, and its components
+                components = [
+                    disnake.ui.TextInput(
+                        label="Name",
+                        placeholder="Foo Tag",
+                        custom_id="name",
+                        style=TextInputStyle.short,
+                        max_length=50,
+                    ),
+                    disnake.ui.TextInput(
+                        label="Description",
+                        placeholder="Lorem ipsum dolor sit amet.",
+                        custom_id="description",
+                        style=TextInputStyle.paragraph,
+                    ),
+                ]
+                super().__init__(title="Create Tag", components=components)
 
-            @disnake.ui.button(label="Cancel", style=disnake.ButtonStyle.danger)
-            async def cancel(self, button: disnake.ui.Button, interaction: disnake.Interaction):
-                self.input_value = None
-                await interaction.message.edit(view=None)
+            # The callback received when the user input is completed.
+            async def callback(self, inter: disnake.ModalInteraction):
+                embed = disnake.Embed(title="Tag Creation")
+                for key, value in inter.text_values.items():
+                    embed.add_field(
+                        name=key.capitalize(),
+                        value=value[:1024],
+                        inline=False,
+                    )
+                await inter.response.send_message(embed=embed)
 
-            @disnake.ui.button(label="Submit", style=disnake.ButtonStyle.primary)
-            async def submit(self, button: disnake.ui.Button, interaction: disnake.Interaction):
-                await interaction.message.edit(view=None)
-
-        modal = InputModal()
-
-        # Prompt the user for input
-        await inter.send("Please enter the advert:")
-
-        # Wait for user input
-        response = await client.wait_for("message", check=lambda m: m.author.id == inter.user.id)
-
-        # Store the input value
-        modal.input_value = response.content
-
-        # Create and send the embed
-        embed = disnake.Embed(title="Partnership Advert", description=modal.input_value, color=disnake.Color.blurple())
-        disnake.AllowedMentions(mention_here=True)
-        disnake.AllowedMentions(mention_everyone=True)
-        if ping.lower == "no":
-            pass
-        
-        elif ping.lower == "here":
-            await inter.send("@here")
-
-        else:
-            await inter.send("@everyone")
-        await inter.send(embed=embed, view=modal)
 
 def setup(client):
     client.add_cog(Staff(client))
