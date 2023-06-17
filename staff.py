@@ -89,6 +89,8 @@ class Staff(commands.Cog):
                     )
                 await inter.response.send_message(embed=embed)
 
+        await inter.response.send_modal(modal=MyModal())
+
 
 def setup(client):
     client.add_cog(Staff(client))
