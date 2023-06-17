@@ -84,16 +84,16 @@ class Staff(commands.Cog):
 
         # Create and send the embed
         embed = disnake.Embed(title="Partnership Advert", description=modal.input_value, color=disnake.Color.blurple())
-        mention_here = disnake.AllowedMentions(mention_here=True)
-        mention_everyone = disnake.AllowedMentions(mention_everyone=True)
+        disnake.AllowedMentions(mention_here=True)
+        disnake.AllowedMentions(mention_everyone=True)
         if ping.lower == "no":
             pass
         
         elif ping.lower == "here":
-            await inter.send("@here", allowed_mentions=mention_here)
+            await inter.send("@here")
 
         else:
-            await inter.send("@everyone", allowed_mentions=mention_everyone)
+            await inter.send("@everyone")
         await inter.send(embed=embed, view=modal)
 
 def setup(client):
