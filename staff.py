@@ -94,10 +94,11 @@ class Staff(commands.Cog):
                         value=value[:1024],
                         inline=False,
                     )
-                if inter.text_values.items[2].lower() == 'everyone':
+                ping_value = inter.text_values.get('ping', '').lower()
+                if  ping_value == 'everyone':
                     await inter.send_message('@everyone')
 
-                if inter.text_values.items[2].lower() == 'here':
+                if ping_value == 'here':
                     await inter.send_message('@here')
                 
                 await inter.response.send_message(embed=embed)
