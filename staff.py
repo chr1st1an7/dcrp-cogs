@@ -51,7 +51,7 @@ class Staff(commands.Cog):
 
 
     @commands.slash_command()
-    @commands.has_any_role(1115701058384179300, 1115635235795775588)
+    @commands.has_any_role(1115701058384179300, 1115635235795775588, 1115611692139819028)
     async def partnership(self, inter: disnake.AppCmdInter):
         client = self.client
           # Acknowledge the command before executing
@@ -64,7 +64,7 @@ class Staff(commands.Cog):
                 components = [
                     disnake.ui.TextInput(
                         label="Name",
-                        placeholder="Foo Tag",
+                        placeholder="DC:RP",
                         custom_id="name",
                         style=TextInputStyle.short,
                         max_length=50,
@@ -75,18 +75,31 @@ class Staff(commands.Cog):
                         custom_id="description",
                         style=TextInputStyle.paragraph,
                     ),
+                    disnake.ui.TextInput(
+                        label="Ping",
+                        placeholder="Everyone",
+                        custom_id="ping",
+                        style=TextInputStyle.short,
+                        max_length=50,
+                    )
                 ]
-                super().__init__(title="Create Tag", components=components)
+                super().__init__(title="Partnership Advert", components=components)
 
             # The callback received when the user input is completed.
             async def callback(self, inter: disnake.ModalInteraction):
-                embed = disnake.Embed(title="Tag Creation")
+                embed = disnake.Embed(title="Partnership Advert")
                 for key, value in inter.text_values.items():
                     embed.add_field(
                         name=key.capitalize(),
                         value=value[:1024],
                         inline=False,
                     )
+                if inter.text_values.items[2].lower() == 'everyone':
+                    await inter.send_message('@everyone')
+
+                if inter.text_values.items[2].lower() == 'here':
+                    await inter.send_message('@here')
+                
                 await inter.response.send_message(embed=embed)
 
         await inter.response.send_modal(modal=MyModal())
