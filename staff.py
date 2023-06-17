@@ -63,7 +63,7 @@ class Staff(commands.Cog):
                 if isinstance(component, disnake.ui.SelectMenu):
                     modal.input_values[component.custom_id] = component.values[0]
 
-            await interaction.response.defer()
+            #await interaction.response.defer()
 
         modal.add_item(
             disnake.ui.SelectMenu(
