@@ -58,6 +58,9 @@ class Staff(commands.Cog):
         modal = disnake.ui.View()
         modal.input_values = {}  # Dictionary to store input values
 
+        modal = disnake.ui.View()
+        modal.input_values = {}  # Dictionary to store input values
+
         async def callback(interaction):
             for component in interaction.message.components:
                 if isinstance(component, disnake.ui.Select):
@@ -87,7 +90,7 @@ class Staff(commands.Cog):
             )
         )
 
-        modal.add_item(disnake.ui.Button(style=disnake.ButtonStyle.primary, label="Submit", custom_id="submit", row=1))
+        modal.add_item(disnake.ui.Button(style=disnake.ButtonStyle.primary, label="Submit", custom_id="submit"))
         modal.callback = callback
 
         await inter.send("Please select options for the embed:", view=modal)
