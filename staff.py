@@ -50,7 +50,7 @@ class Staff(commands.Cog):
 
 
     @commands.slash_command()
-    @commands.has_role(1115701058384179300)
+    @commands.has_any_role(1115701058384179300, 1115635235795775588)
     async def partnership(self, inter, ping : str = commands.Param(choices=["No", "Here", "Everyone"])):
         client = self.client
           # Acknowledge the command before executing
