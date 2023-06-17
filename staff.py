@@ -95,11 +95,11 @@ class Staff(commands.Cog):
 
                 ping_value = inter.text_values.get('ping', '').lower()
                 if ping_value == 'everyone':
-                    await inter.send_message('@everyone')
+                    await inter.edit_original_message(content="@everyone")
                 elif ping_value == 'here':
-                    await inter.send_message('@here')
+                    await inter.edit_original_message(content="@here")
 
-                await inter.response.send_message(embed=embed)
+                await inter.edit_original_message(embed=embed)
 
         modal = MyModal()
         await inter.response.send_modal(modal=modal)
