@@ -86,7 +86,7 @@ class Staff(commands.Cog):
                 super().__init__(title="Partnership Advert", components=components)
 
             # The callback received when the user input is completed.
-            async def callback(self, inter: disnake.ModalInteraction):
+            async def callback(self, inter: disnake.ModalInteraction, ctx):
                 embed = disnake.Embed(title="Partnership Advert")
                 for key, value in inter.text_values.items():
                     embed.add_field(
@@ -95,13 +95,12 @@ class Staff(commands.Cog):
                         inline=False,
                     )
                 ping_value = inter.text_values.get('ping', '').lower()
-                if  ping_value == 'everyone':
-                    await inter.send_message('@everyone')
+                if ping_value == 'everyone':
+                    await ctx.send_message('@everyone')
 
                 if ping_value == 'here':
-                    await inter.send_message('@here')
-                
-                await inter.response.send_message(embed=embed)
+                    await ctx.send_message('@here')
+                    await ctx.send_message(embed=embed)
 
         await inter.response.send_modal(modal=MyModal())
 
