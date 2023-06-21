@@ -21,7 +21,7 @@ class Staff(commands.Cog):
     management_roles = [1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955]
 
     @commands.slash_command()
-    @commands.has_any_role(management_roles)
+    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
         channel = self.client.get_channel(1115706650100244580)
         embed = disnake.Embed(title = "Staff Application Result", color=0xe4d96f)
@@ -51,7 +51,7 @@ class Staff(commands.Cog):
 
 
     @commands.slash_command()
-    @commands.has_any_role(management_roles)
+    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion"])):
         channel = self.client.get_channel(1115890559710679081)
         if type.lower() == "promotion":
@@ -64,7 +64,7 @@ class Staff(commands.Cog):
         await inter.response.send_message(approve)
 
     @commands.slash_command()
-    @commands.has_any_role(management_roles)
+    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def partnership(self, inter: disnake.AppCmdInter):
         client = self.client
           # Acknowledge the command before executing
