@@ -18,7 +18,7 @@ class Staff(commands.Cog):
         print(f'Staff Cog is online.')
 
     
-    management_roles = [1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564]
+    management_roles = [1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955]
 
     @commands.slash_command()
     @commands.has_any_role(management_roles)
