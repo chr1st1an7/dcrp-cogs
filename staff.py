@@ -56,9 +56,13 @@ class Staff(commands.Cog):
         channel = self.client.get_channel(1115890559710679081)
         if type.lower() == "promotion":
             color = disnake.Color.green()
+            guild = inter.guild
+            role = guild.get_role(1120960483357368370)
 
         else:
             color = disnake.Color.red()
+            guild = inter.guild
+            role = guild.get_role(1120960508275732601)
 
         embed = disnake.Embed(title = "<:DCRP_LOGO:1120374872950972549> **DCRP Movement** <:DCRP_LOGO:1120374872950972549>", color = color)
 
@@ -66,7 +70,7 @@ class Staff(commands.Cog):
             approve == inter.author
         
         embed.add_field(name = "Username:", value = username.mention, inline = False)
-        embed.add_field(name = "Demotion/Promotion:", value = type, inline = False)
+        embed.add_field(name = "Demotion/Promotion:", value = role, inline = False)
         embed.add_field(name = "Rank:", value = rank.mention, inline = False)
         embed.add_field(name = "Reason:", value = reason, inline = False)
         embed.add_field(name = "Authorised by:", value = approve, inline = False)
