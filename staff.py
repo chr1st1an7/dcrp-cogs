@@ -52,7 +52,7 @@ class Staff(commands.Cog):
 
     @commands.slash_command()
     @commands.has_any_role(management_roles)
-    async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = commands.Param[disnake.Member], type : str = commands.Param(choices=["Promotion", "Demotion"])):
+    async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion"])):
         channel = self.client.get_channel(1115890559710679081)
         if type.lower() == "promotion":
             color = disnake.Color.green()
