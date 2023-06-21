@@ -75,7 +75,8 @@ class Staff(commands.Cog):
         embed.add_field(name = "Reason:", value = reason, inline = False)
         embed.add_field(name = "Authorised by:", value = approve, inline = False)
 
-        await inter.response.send_message(embed=embed)
+        await channel.send(username.mention)
+        await channel.send(embed=embed)
         #await inter.response.send_message(approve)
 
     @commands.slash_command()
