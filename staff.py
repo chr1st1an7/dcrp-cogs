@@ -77,7 +77,7 @@ class Staff(commands.Cog):
 
         await channel.send(username.mention)
         await channel.send(embed=embed)
-        #await inter.response.send_message(approve)
+        await inter.response.send_message(":white_check_mark: **Sent it to <#1115890559710679081>.**", ephemeral=True)
 
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
