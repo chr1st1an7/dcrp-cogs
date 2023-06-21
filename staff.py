@@ -70,7 +70,7 @@ class Staff(commands.Cog):
             approve == inter.author
         
         embed.add_field(name = "Username:", value = username.mention, inline = False)
-        embed.add_field(name = "Demotion/Promotion:", value = role, inline = False)
+        embed.add_field(name = "Demotion/Promotion:", value = role.mention, inline = False)
         embed.add_field(name = "Rank:", value = rank.mention, inline = False)
         embed.add_field(name = "Reason:", value = reason, inline = False)
         embed.add_field(name = "Authorised by:", value = approve, inline = False)
