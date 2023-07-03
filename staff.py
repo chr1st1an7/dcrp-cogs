@@ -52,17 +52,22 @@ class Staff(commands.Cog):
 
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
-    async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion"])):
+    async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion", "Retirement"])):
         channel = self.client.get_channel(1115890559710679081)
         if type.lower() == "promotion":
             color = disnake.Color.green()
             guild = inter.guild
             role = guild.get_role(1120960483357368370)
 
-        else:
+        elif type.lower() ==  "demotion":
             color = disnake.Color.red()
             guild = inter.guild
             role = guild.get_role(1120960508275732601)
+        
+        else:
+            color = disnake.Color.blue()
+            guild = inter.guild
+            role = guild.get_role(1125388942007611554)
 
         embed = disnake.Embed(title = "<:DCRP_LOGO:1120374872950972549> **DCRP Movement** <:DCRP_LOGO:1120374872950972549>", color = color)
 
