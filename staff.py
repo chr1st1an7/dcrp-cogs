@@ -141,7 +141,7 @@ class Staff(commands.Cog):
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1115695027100864592)
     async def ra(self, inter, username : disnake.Member, roblox_username : str, time : str, ping : disnake.Member, number : str = commands.Param(choices=["1st R/A", "2nd R/A"])):
-        channel = self.client.get_channel(1115890559710679081)
+        channel = self.client.get_channel(1117417815754948658)
         
         
 
