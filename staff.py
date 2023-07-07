@@ -138,6 +138,31 @@ class Staff(commands.Cog):
         modal = MyModal()
         await inter.response.send_modal(modal=modal)
 
+    @commands.slash_command()
+    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1115695027100864592)
+    async def ra(self, inter, username : disnake.Member, roblox_username : str, time : str, ping : disnake.Member, number : str = commands.Param(choices=["1st R/A", "2nd R/A"])):
+        channel = self.client.get_channel(1115890559710679081)
+        
+        
+
+        color = disnake.Color.blue()
+        embed = disnake.Embed(title = " **Ridealong request** ", color = color)
+
+        
+        embed.add_field(name = "Discord username:", value = username.mention, inline = False)
+        embed.add_field(name = "Roblox username:", value = roblox_username, inline = False)
+        embed.add_field(name = "Time:", value = time, inline = False)
+        embed.add_field(name = "Ping:", value = ping, inline = False)
+
+        if number.lower() == "1st r/a":
+            embed.add_field(name = "Ridealong number", value = "1st R/A", inline = False)
+
+        if number.lower() ==  "2nd r/a":
+            embed.add_field(name = "Ridealong number", value = "2nd R/A", inline = False)
+
+        await channel.send(ping.mention)
+        await channel.send(embed=embed)
+        await inter.response.send_message(":white_check_mark: **Sent it to <#1117417815754948658>.**", ephemeral=True)
 
 def setup(client):
     client.add_cog(Staff(client))
