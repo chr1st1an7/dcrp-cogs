@@ -160,7 +160,7 @@ class Staff(commands.Cog):
         
         
 
-        color = disnake.Color.blue()
+        color = 0x827abd
         embed = disnake.Embed(title = " **Ridealong request** ", color = color)
 
         
@@ -174,9 +174,10 @@ class Staff(commands.Cog):
 
         if number.lower() ==  "2nd r/a":
             embed.add_field(name = "Ridealong number", value = "2nd R/A", inline = False)
-
+        embed.set_image(url = "https://cdn.discordapp.com/attachments/967322688605536278/1127164653240328222/Ridealongs.png")
         await channel.send(ping.mention)
-        await channel.send(embed=embed)
+        await channel.send(embed=embed) #827abd
+       
         await inter.response.send_message(":white_check_mark: **Sent it to <#1117417815754948658>.**", ephemeral=True)
 
 def setup(client):
