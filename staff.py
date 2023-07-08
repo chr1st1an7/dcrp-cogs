@@ -7,6 +7,7 @@ from disnake import ButtonStyle, Interaction
 from disnake.ext import tasks
 import random
 from disnake import TextInputStyle
+import datetime
 
 class Staff(commands.Cog):
     client = commands
@@ -53,32 +54,41 @@ class Staff(commands.Cog):
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion", "Retirement"])):
+        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         channel = self.client.get_channel(1115890559710679081)
         if type.lower() == "promotion":
-            color = disnake.Color.green()
+            color = 0x50aa2d
             guild = inter.guild
             role = guild.get_role(1120960483357368370)
+            embed.set_image(url="https://media.discordapp.net/attachments/967322688605536278/1126981381084426250/Movements_Green.png?width=900&height=300")
 
         elif type.lower() ==  "demotion":
-            color = disnake.Color.red()
+            color = 0x900000
             guild = inter.guild
             role = guild.get_role(1120960508275732601)
+            embed.set_image(url="https://media.discordapp.net/attachments/967322688605536278/1126981330001997885/Movements_Red.png?width=900&height=300")
         
         else:
-            color = disnake.Color.blue()
+            color = 0x98cfff
             guild = inter.guild
             role = guild.get_role(1125388942007611554)
+            embed.set_image(url="https://media.discordapp.net/attachments/967322688605536278/1126981362335879218/Movements_Blue.png?width=900&height=300")
 
-        embed = disnake.Embed(title = "<:DCRP_LOGO:1120374872950972549> **DCRP Movement** <:DCRP_LOGO:1120374872950972549>", color = color)
+        embed = disnake.Embed(title = "**DCRP Movement**", color = color, description="** A staff member's roles have been updated. **")
+
 
         if approve == "":
             approve == inter.author
         
+        embed.set_author(name = "DCRP Movements", icon_url="https://media.discordapp.net/attachments/1115898779552456744/1120345364780810410/DCRP_LOGO.png")
         embed.add_field(name = "Username:", value = username.mention, inline = False)
-        embed.add_field(name = "Demotion/Promotion:", value = role.mention, inline = False)
-        embed.add_field(name = "Rank:", value = rank.mention, inline = False)
+        embed.add_field(name = "Movement Type:", value = role.mention, inline = False)
+        embed.add_field(name = "New Rank:", value = rank.mention, inline = False)
         embed.add_field(name = "Reason:", value = reason, inline = False)
         embed.add_field(name = "Authorised by:", value = approve, inline = False)
+        
+
+        embed.set_footer(text = f"Time of Movement: • {current_time}")
 
         await channel.send(username.mention)
         await channel.send(embed=embed)
