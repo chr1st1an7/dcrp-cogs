@@ -54,7 +54,7 @@ class Staff(commands.Cog):
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion", "Retirement"])):
-        embed = disnake.Embed(title = "**DCRP Movement**", description="** A staff member's roles have been updated. **")
+        embed = disnake.Embed(title = "**DCRP Movement**", description="*** A staff member's roles have been updated. ***")
         
         if type.lower() == "promotion":
             color = 0x50aa2d
