@@ -157,13 +157,13 @@ class Staff(commands.Cog):
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1115695027100864592)
     async def ra(self, inter, username : disnake.Member, roblox_username : str, time : str, ping : disnake.Member, number : str = commands.Param(choices=["1st R/A", "2nd R/A"])):
         channel = self.client.get_channel(1117417815754948658)
-        
+        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
 
         color = 0x827abd
-        embed = disnake.Embed(title = " **Ridealong request** ", color = color)
+        embed = disnake.Embed(title = " **DCRP Ridealong Request** ", color = color)
 
-        
+        embed.set_author(name = "DCRP Ridealongs", icon_url="https://media.discordapp.net/attachments/1115898779552456744/1120345364780810410/DCRP_LOGO.png")
         embed.add_field(name = "Discord username:", value = username.mention, inline = False)
         embed.add_field(name = "Roblox username:", value = roblox_username, inline = False)
         embed.add_field(name = "Time:", value = time, inline = False)
@@ -174,7 +174,10 @@ class Staff(commands.Cog):
 
         if number.lower() ==  "2nd r/a":
             embed.add_field(name = "Ridealong number", value = "2nd R/A", inline = False)
+
         embed.set_image(url = "https://cdn.discordapp.com/attachments/967322688605536278/1127164653240328222/Ridealongs.png")
+        embed.set_footer(text = f"Time of Request: • {current_time}")
+
         await channel.send(ping.mention)
         await channel.send(embed=embed) #827abd
        
