@@ -55,7 +55,7 @@ class Staff(commands.Cog):
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion", "Retirement"])):
         embed = disnake.Embed(title = "**DCRP Movement**", description="** A staff member's roles have been updated. **")
-        embed.color = color
+        
         if type.lower() == "promotion":
             color = 0x50aa2d
             guild = inter.guild
@@ -74,7 +74,7 @@ class Staff(commands.Cog):
             role = guild.get_role(1125388942007611554)
             embed.set_image(url="https://media.discordapp.net/attachments/967322688605536278/1126981362335879218/Movements_Blue.png?width=900&height=300")
         
-        
+        embed.color = color
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         channel = self.client.get_channel(1115890559710679081)
         
