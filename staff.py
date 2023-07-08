@@ -161,7 +161,7 @@ class Staff(commands.Cog):
         
 
         color = 0x827abd
-        embed = disnake.Embed(title = " **DCRP Ridealong Request** ", color = color)
+        embed = disnake.Embed(title = " **DCRP Ridealong Request** ", color = color, description = "***A staff member has requested a ridealong***")
 
         embed.set_author(name = "DCRP Ridealongs", icon_url="https://media.discordapp.net/attachments/1115898779552456744/1120345364780810410/DCRP_LOGO.png")
         embed.add_field(name = "Discord username:", value = username.mention, inline = False)
