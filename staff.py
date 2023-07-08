@@ -167,7 +167,7 @@ class Staff(commands.Cog):
         embed.add_field(name = "Discord username:", value = username.mention, inline = False)
         embed.add_field(name = "Roblox username:", value = roblox_username, inline = False)
         embed.add_field(name = "Time:", value = time, inline = False)
-        embed.add_field(name = "Ping:", value = ping, inline = False)
+        embed.add_field(name = "Ping:", value = ping.mention, inline = False)
 
         if number.lower() == "1st r/a":
             embed.add_field(name = "Ridealong number", value = "1st R/A", inline = False)
