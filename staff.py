@@ -24,7 +24,7 @@ class Staff(commands.Cog):
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
-        channel = self.client.get_channel(1115706650100244580)
+        channel = self.client.get_channel(1134394613885575269)
         embed = disnake.Embed(title = "Staff Application Result", color=0xe4d96f)
         if result == "Accepted":
             embed.color = disnake.Color.green()
@@ -48,7 +48,7 @@ class Staff(commands.Cog):
         await channel.send(f"{username.mention}")
         await channel.send(embed=embed)
         
-        await inter.response.send_message(":white_check_mark: **Sent it to <#1115706650100244580>.**", ephemeral=True)
+        await inter.response.send_message(":white_check_mark: **Sent it to <#1134394613885575269>.**", ephemeral=True)
 
 
     @commands.slash_command()
@@ -76,7 +76,7 @@ class Staff(commands.Cog):
         
         embed.color = color
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        channel = self.client.get_channel(1115890559710679081)
+        channel = self.client.get_channel(1134061155187433534)
         
 
        
@@ -97,7 +97,7 @@ class Staff(commands.Cog):
 
         await channel.send(username.mention)
         await channel.send(embed=embed)
-        await inter.response.send_message(":white_check_mark: **Sent it to <#1115890559710679081>.**", ephemeral=True)
+        await inter.response.send_message(":white_check_mark: **Sent it to <#1134061155187433534>.**", ephemeral=True)
 
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
@@ -156,7 +156,7 @@ class Staff(commands.Cog):
     @commands.slash_command()
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1115695027100864592)
     async def ra(self, inter, username : disnake.Member, roblox_username : str, time : str, ping : disnake.Member, number : str = commands.Param(choices=["1st R/A", "2nd R/A"])):
-        channel = self.client.get_channel(1117417815754948658)
+        channel = self.client.get_channel(1134066792889860167)
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
 
@@ -181,7 +181,7 @@ class Staff(commands.Cog):
         await channel.send(ping.mention)
         await channel.send(embed=embed) #827abd
        
-        await inter.response.send_message(":white_check_mark: **Sent it to <#1117417815754948658>.**", ephemeral=True)
+        await inter.response.send_message(":white_check_mark: **Sent it to <#1134066792889860167>.**", ephemeral=True)
 
 def setup(client):
     client.add_cog(Staff(client))
