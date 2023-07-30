@@ -42,11 +42,12 @@ class Staff(commands.Cog):
         name=f"@{inter.author}",
         icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
         
-        embed.add_field(name="**Result:**", value=result, inline=False)    
+        embed.add_field(name="**Result:**", value=guild.get_role(result_role_id), inline=False)    
         embed.add_field(name="**Application Username:**", value=username.mention, inline=False)    
-        embed.add_field(name="**Notes:*", value=notes, inline=False)
+        embed.add_field(name="**Notes:**", value=notes, inline=False)
 
-        
+        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        embed.set_footer(text = f"Time of result: • {current_time}")
         
         await channel.send(f"{username.mention}")
         await channel.send(embed=embed)
