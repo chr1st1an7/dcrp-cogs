@@ -44,7 +44,7 @@ class Staff(commands.Cog):
         name=f"@{inter.author}",
         icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
         
-        embed.add_field(name="**Result:**", value=result.mention, inline=False)    
+        embed.add_field(name="**Result:**", value=result, inline=False)    
         embed.add_field(name="**Application Username:**", value=username.mention, inline=False)    
         embed.add_field(name="**Notes**", value=notes, inline=False)
 
