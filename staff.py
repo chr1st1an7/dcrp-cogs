@@ -25,13 +25,16 @@ class Staff(commands.Cog):
     @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
         channel = self.client.get_channel(1134394613885575269)
-        embed = disnake.Embed(title = "Staff Application Result", color=0xe4d96f)
+        embed = disnake.Embed(title = "DCRP Application Result", color=0xe4d96f, description=f"***{inter.author.mention} has thoroughly read this application.*** ")
+        embed.set_author(name = "DCRP Application Readers", icon_url="https://media.discordapp.net/attachments/1115898779552456744/1120345364780810410/DCRP_LOGO.png")
         if result == "Accepted":
-            embed.color = disnake.Color.green()
+            embed.color = 0x50aa2d
+            embed.set_image(url="https://media.discordapp.net/attachments/967322688605536278/1127193899534913668/Application_Results_Green.png?width=900&height=300")
             result_role_id = 1119234205738602537
         
         else:
-            embed.color = disnake.Color.red()
+            embed.color = 0x900000
+            embed.set_image(url="https://media.discordapp.net/attachments/967322688605536278/1127193933684944946/Application_Results_Red.png?width=900&height=300")
             result_role_id = 1119234212243984424
 
         guild = inter.guild
@@ -41,14 +44,16 @@ class Staff(commands.Cog):
         name=f"@{inter.author}",
         icon_url="https://cdn.discordapp.com/attachments/1115898779552456744/1119233504610373672/Namnlos.png")
         
+        embed.add_field(name="**Result:**", value=result.mention, inline=False)    
+        embed.add_field(name="**Application Username:**", value=username.mention, inline=False)    
+        embed.add_field(name="**Notes**", value=notes, inline=False)
 
-        embed.add_field(name="Username:", value=username.mention, inline=False)    
-        embed.add_field(name="Notes", value=notes, inline=False)
+        
         
         await channel.send(f"{username.mention}")
         await channel.send(embed=embed)
         
-        await inter.response.send_message(":white_check_mark: **Sent it to <#1134394613885575269>.**", ephemeral=True)
+        
 
 
     @commands.slash_command()
