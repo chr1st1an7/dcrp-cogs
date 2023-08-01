@@ -22,7 +22,7 @@ class Staff(commands.Cog):
     management_roles = [1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955]
 
     @commands.slash_command()
-    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955)
+    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1116311558331580436)
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
         channel = self.client.get_channel(1134394613885575269)
         embed = disnake.Embed(title = "DCRP Application Result", color=0xe4d96f, description=f"***{inter.author.mention} has thoroughly read this application.*** ")
@@ -56,7 +56,7 @@ class Staff(commands.Cog):
 
 
     @commands.slash_command()
-    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1116311558331580436, 1115633196336422942)
+    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1116311558331580436, 1115633196336422942, 1116311558331580436)
     async def movement(self, inter, username : disnake.Member, rank : disnake.Role, reason : str, approve = disnake.Member, type : str = commands.Param(choices=["Promotion", "Demotion", "Retirement"])):
         embed = disnake.Embed(title = "**DCRP Movement**", description="*** A staff member's roles have been updated. ***")
         
@@ -158,7 +158,7 @@ class Staff(commands.Cog):
         await inter.response.send_modal(modal=modal)
 
     @commands.slash_command()
-    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1115695027100864592)
+    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1115695027100864592, 1116311558331580436)
     async def ra(self, inter, username : disnake.Member, roblox_username : str, time : str, ping : disnake.Member, number : str = commands.Param(choices=["1st R/A", "2nd R/A"])):
         channel = self.client.get_channel(1134066792889860167)
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
