@@ -34,7 +34,7 @@ class Events(commands.Cog):
         exists = any(mention.id in [495517683429801984, 649280874550132746, 474938992966631425, 957733978666840085] for mention in message.mentions)
         if message.author == self.bot.user:
             return
-        if exists and message.author.get_role(1115695027100864592) is None and message.author.get_role(1144303846647156837) is None: 
+        if exists and message.author.get_role(1115695027100864592) is None and message.author.get_role(1144303846647156837) is None and message.author.get_role(1115642951272505405) is not None: 
             embed = disnake.Embed(color=0x827abd, description="Please do not ping <@&1122489752579485796>. They are often busy and have very limited time. If you need any support then please contact <@&1116311558331580436> instead. Alternatively, you may also open a ticket in <#1134082915123335282>." )
             embed.set_author(name="DRPC Ownership", icon_url="https://media.discordapp.net/attachments/1134066455932051538/1206575134350245919/Untitled.png?ex=65e5bc29&is=65d34729&hm=9be3e9cd9ba51b446099746b408863040666013ec5c41c3272e1a896124d3b39&=&format=webp&quality=lossless&width=900&height=671")
             embed.set_thumbnail(url="https://media.discordapp.net/attachments/1134066455932051538/1206575134350245919/Untitled.png?ex=65e5bc29&is=65d34729&hm=9be3e9cd9ba51b446099746b408863040666013ec5c41c3272e1a896124d3b39&=&format=webp&quality=lossless&width=900&height=671")
