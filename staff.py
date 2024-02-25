@@ -155,13 +155,13 @@ class Staff(commands.Cog):
      raise error   
 
     @commands.slash_command()
-    @commands.has_any_role(1115703473988702368) 
+    @commands.has_any_role(1134051764568596540) 
     async def session(self, inter):
        now = datetime.now()
        epochtime = int(time.time())
        channel_id = 1134483599605891143
        channel = self.client.get_channel(channel_id)
-       except_message = await channel.fetch_message(1210971786842345483)
+       except_message = await channel.fetch_message(1205554906983956572)
     
        bot_messages = await channel.history(limit=None).filter(lambda msg: msg.author == self.client.user).flatten()
        mentioned_everyone = any("@everyone" in msg.content for msg in bot_messages)
