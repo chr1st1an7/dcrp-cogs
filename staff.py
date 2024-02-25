@@ -7,6 +7,8 @@ from disnake import ButtonStyle, Interaction
 from disnake.ext import tasks
 import random
 from disnake import TextInputStyle
+from datetime import datetime
+import time
 
 class Staff(commands.Cog):
     client = commands
@@ -18,7 +20,7 @@ class Staff(commands.Cog):
         print(f'Staff Cog is online.')
 
     
-    management_roles = [1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955]
+    management_roles = [1115611692139819028, 1116311558331580436, 1115633196336422942, 1122489752579485796]
 
     # Result command
     @commands.slash_command()
@@ -115,7 +117,7 @@ class Staff(commands.Cog):
     
 
     @commands.slash_command()
-    @commands.has_any_role(1115611692139819028, 1115635235795775588, 1115636523325460580, 1118966558669164564, 1115611714562555955, 1115695027100864592, 1116311558331580436)
+    @commands.has_any_role(1145668152018092142)
     async def ra(self, inter, username : disnake.Member, roblox_username : str, time : str, ping : disnake.Member, number : str = commands.Param(choices=["1st R/A", "2nd R/A"])):
         channel = self.client.get_channel(1134066792889860167)
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -137,12 +139,68 @@ class Staff(commands.Cog):
             embed.add_field(name = "Ridealong number", value = "2nd R/A", inline = False)
 
         embed.set_image(url = "https://cdn.discordapp.com/attachments/967322688605536278/1127164653240328222/Ridealongs.png")
-        embed.set_footer(text = f"Time of Request: • {current_time}")
+        embed.set_footer(text = f"Time of Request: @ {current_time}")
 
         await channel.send(ping.mention)
         await channel.send(embed=embed) #827abd
        
         await inter.response.send_message(":white_check_mark: **Sent it to <#1134066792889860167>.**", ephemeral=True)
+
+    @ra.error
+    async def resulterror(self, inter, error):
+     if isinstance(error, commands.MissingAnyRole):
+      await inter.response.send_message(":x: **You must have the <@&1145668152018092142> role to run this command.**", ephemeral = True)
+      return
+     await inter.response.send_message("Something went really wrong...", ephemeral = True)
+     raise error   
+
+    @commands.slash_command()
+    @commands.has_any_role(1115703473988702368) 
+    async def session(self, inter):
+       now = datetime.now()
+       epochtime = int(time.time())
+       channel_id = 1134483599605891143
+       channel = self.client.get_channel(channel_id)
+       except_message = await channel.fetch_message(1210971786842345483)
+    
+       bot_messages = await channel.history(limit=None).filter(lambda msg: msg.author == self.client.user).flatten()
+       mentioned_everyone = any("@everyone" in msg.content for msg in bot_messages)
+       await channel.purge(check=lambda msg: msg.id != except_message.id)
+    
+       if mentioned_everyone:
+        Title = "Dallas Roleplay Server Shutdown"
+        Image = "https://media.discordapp.net/attachments/967353279552053292/1126803993344090192/Server-Shutdown.png?ex=65ead77f&is=65d8627f&hm=3e847960769d9aaecd5d83129001be8d8c5a6b956abec9fbb7ff1f57cdda8f3a&=&format=webp&quality=lossless&width=900&height=300"
+        Footer = "We'll see you in the next SSU!"
+        Desc = ('The Dallas County Roleplay server is currently **shutdown**. At this time we recommend you to not join the server as it is not going to be moderated.\n\n**SSU Times:**\n<t:1707066000:t> - Weekdays\n<t:1707062400:t> - Saturdays\n<t:1707058800:t> - Sundays\n\n*Please note that these times are an estimate and we may occasionally hold SSUs at any time that we find fit.*\n\n**Since:** <t:{0}:f>\n**Author:** {1}'.format(epochtime, inter.author.mention))  
+       else:
+        Title = "Dallas Roleplay Server Startup"
+        Image = "https://cdn.discordapp.com/attachments/967353279552053292/1126803975677685812/Server-Startup.png"
+        Footer = "Join the best Dallas roleplay experience right now!"
+        Desc = ("**Dallas Roleplay Community | Strict**\nCode: **dallasRP**\n**Invite link:** [here](https://policeroleplay.community/join/dallasRP)\n\n**Since:** <t:{0}:f>\n**Author:** {1}".format(epochtime, inter.author.mention))
+    
+       embed = disnake.Embed(title=Title, description=Desc, color=0x827abd)
+       embed.set_author(
+          name="Dallas Roleplay Sessions", 
+          icon_url="https://media.discordapp.net/attachments/1134066455932051538/1205550344331985006/ggdrpc-removebg-preview.png?ex=65eb3c40&is=65d8c740&hm=ea84f8b9c9c6ad0077f14da769ccbf1adbe7eac5215a9fb7b9b0953e586aeff5&=&format=webp&quality=lossless"
+       )
+       embed.set_footer(text=Footer)
+       embed.set_image(url=Image)
+       embed.set_thumbnail(url="https://media.discordapp.net/attachments/1134066455932051538/1206575134350245919/Untitled.png?ex=65e5bc29&is=65d34729&hm=9be3e9cd9ba51b446099746b408863040666013ec5c41c3272e1a896124d3b39&=&format=webp&quality=lossless&width=900&height=671")
+       if mentioned_everyone:
+          await channel.send(embed=embed)
+       else:
+          await channel.send("@everyone", embed=embed)
+       await inter.response.send_message("Sent", ephemeral=True)
+
+    
+    @session.error
+    async def resulterror(self, inter, error):
+     if isinstance(error, commands.MissingAnyRole):
+      await inter.response.send_message(":x: **You must have the <@&1115703473988702368> role to run this command.**", ephemeral = True)
+      return
+     await inter.response.send_message("Something went really wrong...", ephemeral = True)
+     raise error
+       
 
 def setup(client):
     client.add_cog(Staff(client))
