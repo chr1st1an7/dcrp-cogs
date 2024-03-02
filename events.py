@@ -12,6 +12,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        # Application autoresponse
         if message.author == self.bot.user:
             return
         if re.search(r'\b(apply|application)\b' , message.content.lower()):
@@ -31,6 +32,7 @@ class Events(commands.Cog):
              embed.set_thumbnail(url="https://media.discordapp.net/attachments/1134066455932051538/1205550344331985006/ggdrpc-removebg-preview.png?ex=65eb3c40&is=65d8c740&hm=ea84f8b9c9c6ad0077f14da769ccbf1adbe7eac5215a9fb7b9b0953e586aeff5&=&format=webp&quality=lossless")
              await message.reply(embed=embed)
         
+        # Do not ping Founders/Presidential autoresponse
         exists = any(mention.id in [495517683429801984, 649280874550132746, 474938992966631425, 957733978666840085] for mention in message.mentions)
         if message.author == self.bot.user:
             return
