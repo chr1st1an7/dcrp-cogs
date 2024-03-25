@@ -45,6 +45,7 @@ class Help(commands.Cog):
             await inter.followup.send(components=new_components, embed=embed)
             message = await inter.original_response()
             self.timers[message.id] = asyncio.create_task(self.timer(inter, message))
+            return
         elif menu == "server":
           embed = disnake.Embed(title="DRPC Server Help Panel", description='For information on the server, press **"Info"**. \nFor Human Help, press **"Support"**.', color=0x827abd)
           new_components = [
@@ -53,6 +54,7 @@ class Help(commands.Cog):
               disnake.ui.Button(style=disnake.ButtonStyle.blurple, emoji = left_arrow, custom_id="Back")
           ]
           await inter.response.edit_message(components=new_components, embed=embed)
+          return
         elif menu == "server_info":
           embed = disnake.Embed(title="DRPC Server Information Panel", description="Here you find Discord Rules, Game rules, FAQ and role information.", color=0x827abd)
           new_components = [
@@ -63,12 +65,14 @@ class Help(commands.Cog):
               disnake.ui.Button(style=disnake.ButtonStyle.blurple, emoji = left_arrow, custom_id="Server")
           ]
           await inter.response.edit_message(components=new_components, embed=embed)
+          return
         elif menu == "bot":
           embed = disnake.Embed(title="DRPC Bot Information Panel", description="To be done", color=0x827abd)
           new_components = [
               disnake.ui.Button(style=disnake.ButtonStyle.blurple, emoji = left_arrow, custom_id="Back")
           ]
           await inter.response.edit_message(components=new_components, embed=embed)
+          return
 
       @commands.slash_command()
       async def help(self, inter: disnake.ApplicationCommandInteraction): 

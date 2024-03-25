@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from disnake.ext.commands import command, has_permissions, bot_has_permissions
+from disnake.ext.commands import command, has_permissions, bot_has_permissions, BucketType
 from datetime import datetime
 import time
 
@@ -16,9 +16,10 @@ class Staff(commands.Cog):
 
 
     management_roles = [1115611692139819028, 1116311558331580436, 1115633196336422942, 1122489752579485796]
-
+    
     # Result command
     @commands.slash_command()
+    @commands.cooldown(rate=1, per=20, type=BucketType.member)
     @commands.has_any_role(*management_roles)
     async def result(self, inter, username : disnake.Member, notes : str, result : str = commands.Param(choices=["Accepted", "Denied"])):
         await inter.response.defer(ephemeral=True)

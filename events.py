@@ -5,17 +5,41 @@ import re
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
     
     @commands.Cog.listener()
     async def on_ready(self):
         print(f'Events Cog is online.')
 
     @commands.Cog.listener()
+    async def on_member_join(self, member):
+        channel = self.bot.get_channel(1210987536554532924)
+        embed = {
+          'footer': {'text': 'Questions? Do not hesitate to ask our staff members!'},
+          'image': {
+          'url': 'https://media.discordapp.net/attachments/967353279552053292/1126841923710234724/ezgif.com-gif-maker_1.gif?width=900&height=300&ex=65f43552&is=65e1c052&hm=6acf5d7b4e9ccb2f7b93ec34f9b18c0a56162456a1d4dfa1cbc36372111a638b&',
+        },
+          'thumbnail': {
+          'url': 'https://media.discordapp.net/attachments/1134066455932051538/1206575134350245919/Untitled.png?ex=65eef6a9&is=65dc81a9&hm=4f32dee80cd868edee4de1ada54ce42e0a5313f66ab396782edfd4fc6201278b&=&format=webp&quality=lossless&width=900&height=671',
+        },
+          'author': {
+          'name': 'Dallas Roleplay',
+          'icon_url': 'https://media.discordapp.net/attachments/1134066455932051538/1206575134350245919/Untitled.png?ex=65eef6a9&is=65dc81a9&hm=4f32dee80cd868edee4de1ada54ce42e0a5313f66ab396782edfd4fc6201278b&=&format=webp&quality=lossless&width=900&height=671',
+        },
+          'color': 8551101,
+          'type': 'rich',
+          'description': f'*to the cityscapes of* ***Texas,*** *{member.mention}! We now have* ***{member.guild.member_count}*** *members.* \n\n*Make sure to read our rules*. *They can be found in* ***<#1134046508753375244>*** *and* ***<#1134038859731189831>***\n\nThe **[Staff Application](https://forms.gle/uYCmAyDtCxQ1iiGX9)** or **[Ban Appeal](https://forms.gle/cMJCBiBnwmQT1gRH8)** can be found in **<#1134047342262243430>**, as well as in <#1134049666741309495>.',
+          'title': 'Welcome!'
+        }
+        self.mention = member.mention
+        await channel.send(member.mention, embed=disnake.Embed.from_dict(embed))
+        
+    @commands.Cog.listener()
     async def on_message(self, message):
         # Application autoresponse
         if message.author == self.bot.user:
             return
-        if re.search(r'\b(apply|application)\b' , message.content.lower()):
+        if re.search(r'\b(apply|application)\b', message.content.lower()):
             if message.author.get_role(1115695027100864592) is None:
              embed = disnake.Embed(
                 title="Staff Application", 
@@ -33,7 +57,8 @@ class Events(commands.Cog):
              await message.reply(embed=embed)
         
         # Do not ping Founders/Presidential autoresponse
-        exists = any(mention.id in [495517683429801984, 649280874550132746, 474938992966631425, 957733978666840085] for mention in message.mentions)
+        mentions = message.raw_mentions
+        exists = any(id in [495517683429801984, 649280874550132746, 474938992966631425, 957733978666840085] for id in mentions)
         if message.author == self.bot.user:
             return
         if exists and message.author.get_role(1115695027100864592) is None and message.author.get_role(1144303846647156837) is None and message.author.get_role(1115642951272505405) is None: 
